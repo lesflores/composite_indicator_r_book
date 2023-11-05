@@ -482,7 +482,7 @@ Qo’noS
 <span id="cb3-9"><a href="imputación-de-datos-faltantes.html#cb3-9" tabindex="-1"></a>                     <span class="at">method =</span> <span class="st">&quot;spearman&quot;</span>, <span class="at">use =</span> <span class="st">&quot;complete.obs&quot;</span>)<span class="sc">%&gt;%</span> <span class="fu">round</span>(<span class="dv">1</span>)</span>
 <span id="cb3-10"><a href="imputación-de-datos-faltantes.html#cb3-10" tabindex="-1"></a></span>
 <span id="cb3-11"><a href="imputación-de-datos-faltantes.html#cb3-11" tabindex="-1"></a><span class="fu">ggcorrplot</span>(correlaciones,<span class="at">type=</span><span class="st">&quot;lower&quot;</span>,<span class="at">lab=</span>T,<span class="at">show.legend=</span>T)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-6-1.png" width="672" />
+<p><img src="figures/unnamed-chunk-6-1.png" width="672" />
 Seleccionamos <code>Elecciones_limpias</code> para imputar valores en <code>Libertad_asociacion</code> utilizando la regresión lineal, basándonos en una correlación fuerte negativa de -0.8.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="imputación-de-datos-faltantes.html#cb4-1" tabindex="-1"></a><span class="co"># Modelo lm</span></span>
 <span id="cb4-2"><a href="imputación-de-datos-faltantes.html#cb4-2" tabindex="-1"></a>datos_IST_imputados_2 <span class="ot">&lt;-</span> datos_IST</span>
