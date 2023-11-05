@@ -215,32 +215,32 @@ div.csl-indent {
 <h1><span class="header-section-number">Capítulo 4</span> Normalización<a href="normalización.html#normalización" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>La aplicación de FAMD no se requiere normalizar ni escalar los datos previamente, dado que FactoMineR realiza la normalización de las variables continuas transformándolas en z-scores y codifica las variables categóricas.</p>
 <p>Para otros análisis, las variables continuas pueden convertirse a z-scores para homogeneizar la escala, mientras que las variables dicotómicas se utilizan tal como están.</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="normalización.html#cb11-1" tabindex="-1"></a><span class="co"># Variables continuas</span></span>
-<span id="cb11-2"><a href="normalización.html#cb11-2" tabindex="-1"></a>datos_continuos <span class="ot">&lt;-</span> datos_IST_imputados_3[, <span class="fu">c</span>(<span class="st">&quot;Libertad_asociacion&quot;</span>, <span class="st">&quot;Elecciones_limpias&quot;</span>, <span class="st">&quot;Libertad_expresion&quot;</span>)]</span>
-<span id="cb11-3"><a href="normalización.html#cb11-3" tabindex="-1"></a></span>
-<span id="cb11-4"><a href="normalización.html#cb11-4" tabindex="-1"></a><span class="co"># Normalización</span></span>
-<span id="cb11-5"><a href="normalización.html#cb11-5" tabindex="-1"></a>datos_normalizados <span class="ot">&lt;-</span> <span class="fu">scale</span>(datos_continuos)</span>
-<span id="cb11-6"><a href="normalización.html#cb11-6" tabindex="-1"></a></span>
-<span id="cb11-7"><a href="normalización.html#cb11-7" tabindex="-1"></a>datos_IST_imputados_3[, <span class="fu">c</span>(<span class="st">&quot;Libertad_asociacion&quot;</span>, <span class="st">&quot;Elecciones_limpias&quot;</span>, <span class="st">&quot;Libertad_expresion&quot;</span>)] <span class="ot">&lt;-</span> datos_normalizados</span>
-<span id="cb11-8"><a href="normalización.html#cb11-8" tabindex="-1"></a></span>
-<span id="cb11-9"><a href="normalización.html#cb11-9" tabindex="-1"></a>datos_normalizados</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="normalización.html#cb12-1" tabindex="-1"></a><span class="co"># Variables continuas</span></span>
+<span id="cb12-2"><a href="normalización.html#cb12-2" tabindex="-1"></a>datos_continuos <span class="ot">&lt;-</span> datos_IST_imputados_3[, <span class="fu">c</span>(<span class="st">&quot;Libertad_asociacion&quot;</span>, <span class="st">&quot;Elecciones_limpias&quot;</span>, <span class="st">&quot;Libertad_expresion&quot;</span>)]</span>
+<span id="cb12-3"><a href="normalización.html#cb12-3" tabindex="-1"></a></span>
+<span id="cb12-4"><a href="normalización.html#cb12-4" tabindex="-1"></a><span class="co"># Normalización</span></span>
+<span id="cb12-5"><a href="normalización.html#cb12-5" tabindex="-1"></a>datos_normalizados <span class="ot">&lt;-</span> <span class="fu">scale</span>(datos_continuos)</span>
+<span id="cb12-6"><a href="normalización.html#cb12-6" tabindex="-1"></a></span>
+<span id="cb12-7"><a href="normalización.html#cb12-7" tabindex="-1"></a>datos_IST_imputados_3[, <span class="fu">c</span>(<span class="st">&quot;Libertad_asociacion&quot;</span>, <span class="st">&quot;Elecciones_limpias&quot;</span>, <span class="st">&quot;Libertad_expresion&quot;</span>)] <span class="ot">&lt;-</span> datos_normalizados</span>
+<span id="cb12-8"><a href="normalización.html#cb12-8" tabindex="-1"></a></span>
+<span id="cb12-9"><a href="normalización.html#cb12-9" tabindex="-1"></a>datos_normalizados</span></code></pre></div>
 <pre><code>##       Libertad_asociacion Elecciones_limpias Libertad_expresion
-##  [1,]          -1.0560953          1.2571845          1.1008321
-##  [2,]           0.6481051         -0.2031293          0.3002269
-##  [3,]          -0.6470872          0.4471164          0.1000756
-##  [4,]           0.9548612          0.1429380          1.5011346
-##  [5,]           0.9834695         -1.2194200          0.1801362
-##  [6,]          -1.8741115          1.0915620          0.3802874
-##  [7,]           0.6484911         -0.8040748         -0.3002269
-##  [8,]           0.9889452         -1.3956758         -0.1000756
-##  [9,]          -0.1699111         -0.5669188         -1.3009833
-## [10,]          -0.4766671          1.2504178         -1.8614069
+##  [1,]          -0.9983742          1.2570692         1.04480400
+##  [2,]           0.8642586         -0.2031057         0.43948381
+##  [3,]          -0.5467864          0.4471923         0.06708157
+##  [4,]           1.2165742          0.1428686         1.38201505
+##  [5,]           0.8639992         -1.2193121         0.34917313
+##  [6,]          -1.8986567          1.0917418         0.19784052
+##  [7,]          -0.1036457         -0.8041315        -0.28178906
+##  [8,]           0.9890750         -1.3958243         0.07525119
+##  [9,]          -0.0168633         -0.5668114        -1.32423046
+## [10,]          -0.3695807          1.2503130        -1.94962975
 ## attr(,&quot;scaled:center&quot;)
 ## Libertad_asociacion  Elecciones_limpias  Libertad_expresion 
-##           0.5998507          57.1040000           0.6150000 
+##           0.5559683          57.1032355           0.6651513 
 ## attr(,&quot;scaled:scale&quot;)
 ## Libertad_asociacion  Elecciones_limpias  Libertad_expresion 
-##           0.2933927          31.0344272           0.2498110</code></pre>
+##           0.2688279          31.0339043           0.2422902</code></pre>
 </div>
             </section>
 

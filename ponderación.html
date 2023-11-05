@@ -220,40 +220,40 @@ div.csl-indent {
 <div id="inclusión-de-todas-las-variables" class="section level3 hasAnchor" number="6.1.1">
 <h3><span class="header-section-number">6.1.1</span> Inclusión de Todas las Variables<a href="ponderación.html#inclusión-de-todas-las-variables" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Ejemplo de un índice compuesto basado directamente de todas las variables normalizadas con puntajes z.</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="ponderación.html#cb13-1" tabindex="-1"></a><span class="co"># Data frame con los datos normalizados previamente</span></span>
-<span id="cb13-2"><a href="ponderación.html#cb13-2" tabindex="-1"></a>nombres_planetas <span class="ot">&lt;-</span> datos_IST_imputados_3[, <span class="st">&quot;Planeta&quot;</span>]</span>
-<span id="cb13-3"><a href="ponderación.html#cb13-3" tabindex="-1"></a>puntuaciones_1_df <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(datos_normalizados, nombres_planetas)</span>
-<span id="cb13-4"><a href="ponderación.html#cb13-4" tabindex="-1"></a>puntuaciones_1_df</span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="ponderación.html#cb14-1" tabindex="-1"></a><span class="co"># Data frame con los datos normalizados previamente</span></span>
+<span id="cb14-2"><a href="ponderación.html#cb14-2" tabindex="-1"></a>nombres_planetas <span class="ot">&lt;-</span> datos_IST_imputados_3[, <span class="st">&quot;Planeta&quot;</span>]</span>
+<span id="cb14-3"><a href="ponderación.html#cb14-3" tabindex="-1"></a>puntuaciones_1_df <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(datos_normalizados, nombres_planetas)</span>
+<span id="cb14-4"><a href="ponderación.html#cb14-4" tabindex="-1"></a>puntuaciones_1_df</span></code></pre></div>
 <pre><code>##            Libertad_asociacion Elecciones_limpias Libertad_expresion
-## Vulcano             -1.0560953          1.2571845          1.1008321
-## Tierra               0.6481051         -0.2031293          0.3002269
-## Romulus             -0.6470872          0.4471164          0.1000756
-## Kronos               0.9548612          0.1429380          1.5011346
-## Cardassia            0.9834695         -1.2194200          0.1801362
-## Ferenginar          -1.8741115          1.0915620          0.3802874
-## Bajor                0.6484911         -0.8040748         -0.3002269
-## Betazed              0.9889452         -1.3956758         -0.1000756
-## Trill               -0.1699111         -0.5669188         -1.3009833
-## Qo&#39;noS              -0.4766671          1.2504178         -1.8614069</code></pre>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="ponderación.html#cb15-1" tabindex="-1"></a><span class="co"># Suma</span></span>
-<span id="cb15-2"><a href="ponderación.html#cb15-2" tabindex="-1"></a>suma_1 <span class="ot">&lt;-</span> <span class="fu">rowSums</span>(puntuaciones_1_df)</span>
-<span id="cb15-3"><a href="ponderación.html#cb15-3" tabindex="-1"></a>indice_compuesto_1 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(nombres_planetas, suma_1)</span>
-<span id="cb15-4"><a href="ponderación.html#cb15-4" tabindex="-1"></a>indice_compuesto_1 <span class="ot">&lt;-</span> indice_compuesto_1[<span class="fu">order</span>(<span class="sc">-</span>indice_compuesto_1<span class="sc">$</span>suma_1), ]</span>
-<span id="cb15-5"><a href="ponderación.html#cb15-5" tabindex="-1"></a></span>
-<span id="cb15-6"><a href="ponderación.html#cb15-6" tabindex="-1"></a></span>
-<span id="cb15-7"><a href="ponderación.html#cb15-7" tabindex="-1"></a><span class="co">#Índice compuesto</span></span>
-<span id="cb15-8"><a href="ponderación.html#cb15-8" tabindex="-1"></a>indice_compuesto_1</span></code></pre></div>
-<pre><code>##            nombres_planetas      suma_1
-## Kronos               Kronos  2.59893387
-## Vulcano             Vulcano  1.30192125
-## Tierra               Tierra  0.74520281
-## Cardassia         Cardassia -0.05581434
-## Romulus             Romulus -0.09989518
-## Ferenginar       Ferenginar -0.40226209
-## Bajor                 Bajor -0.45581060
-## Betazed             Betazed -0.50680625
-## Qo&#39;noS               Qo&#39;noS -1.08765627
-## Trill                 Trill -2.03781319</code></pre>
+## Vulcano             -0.9983742          1.2570692         1.04480400
+## Tierra               0.8642586         -0.2031057         0.43948381
+## Romulus             -0.5467864          0.4471923         0.06708157
+## Kronos               1.2165742          0.1428686         1.38201505
+## Cardassia            0.8639992         -1.2193121         0.34917313
+## Ferenginar          -1.8986567          1.0917418         0.19784052
+## Bajor               -0.1036457         -0.8041315        -0.28178906
+## Betazed              0.9890750         -1.3958243         0.07525119
+## Trill               -0.0168633         -0.5668114        -1.32423046
+## Qo&#39;noS              -0.3695807          1.2503130        -1.94962975</code></pre>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="ponderación.html#cb16-1" tabindex="-1"></a><span class="co"># Suma</span></span>
+<span id="cb16-2"><a href="ponderación.html#cb16-2" tabindex="-1"></a>suma_1 <span class="ot">&lt;-</span> <span class="fu">rowSums</span>(puntuaciones_1_df)</span>
+<span id="cb16-3"><a href="ponderación.html#cb16-3" tabindex="-1"></a>indice_compuesto_1 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(nombres_planetas, suma_1)</span>
+<span id="cb16-4"><a href="ponderación.html#cb16-4" tabindex="-1"></a>indice_compuesto_1 <span class="ot">&lt;-</span> indice_compuesto_1[<span class="fu">order</span>(<span class="sc">-</span>indice_compuesto_1<span class="sc">$</span>suma_1), ]</span>
+<span id="cb16-5"><a href="ponderación.html#cb16-5" tabindex="-1"></a></span>
+<span id="cb16-6"><a href="ponderación.html#cb16-6" tabindex="-1"></a></span>
+<span id="cb16-7"><a href="ponderación.html#cb16-7" tabindex="-1"></a><span class="co">#Índice compuesto</span></span>
+<span id="cb16-8"><a href="ponderación.html#cb16-8" tabindex="-1"></a>indice_compuesto_1</span></code></pre></div>
+<pre><code>##            nombres_planetas       suma_1
+## Kronos               Kronos  2.741457885
+## Vulcano             Vulcano  1.303498996
+## Tierra               Tierra  1.100636733
+## Cardassia         Cardassia -0.006139732
+## Romulus             Romulus -0.032512544
+## Betazed             Betazed -0.331498112
+## Ferenginar       Ferenginar -0.609074316
+## Qo&#39;noS               Qo&#39;noS -1.068897521
+## Bajor                 Bajor -1.189566228
+## Trill                 Trill -1.907905161</code></pre>
 </div>
 <div id="puntuaciones-de-las-dimensiones-del-famd" class="section level3 hasAnchor" number="6.1.2">
 <h3><span class="header-section-number">6.1.2</span> Puntuaciones de las dimensiones del FAMD<a href="ponderación.html#puntuaciones-de-las-dimensiones-del-famd" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -261,10 +261,10 @@ div.csl-indent {
 </div>
 <div id="ponderación-relativa" class="section level2 hasAnchor" number="6.2">
 <h2><span class="header-section-number">6.2</span> Ponderación Relativa<a href="ponderación.html#ponderación-relativa" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="ponderación.html#cb17-1" tabindex="-1"></a><span class="co"># Cargas factoriales</span></span>
-<span id="cb17-2"><a href="ponderación.html#cb17-2" tabindex="-1"></a>cargas <span class="ot">&lt;-</span> <span class="fu">get_famd_var</span>(famd)<span class="sc">$</span>coord</span>
-<span id="cb17-3"><a href="ponderación.html#cb17-3" tabindex="-1"></a></span>
-<span id="cb17-4"><a href="ponderación.html#cb17-4" tabindex="-1"></a>cargas_dim1_dim2 <span class="ot">&lt;-</span> cargas[, <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="ponderación.html#cb18-1" tabindex="-1"></a><span class="co"># Cargas factoriales</span></span>
+<span id="cb18-2"><a href="ponderación.html#cb18-2" tabindex="-1"></a>cargas <span class="ot">&lt;-</span> <span class="fu">get_famd_var</span>(famd)<span class="sc">$</span>coord</span>
+<span id="cb18-3"><a href="ponderación.html#cb18-3" tabindex="-1"></a></span>
+<span id="cb18-4"><a href="ponderación.html#cb18-4" tabindex="-1"></a>cargas_dim1_dim2 <span class="ot">&lt;-</span> cargas[, <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>]</span></code></pre></div>
 </div>
 </div>
             </section>

@@ -217,111 +217,44 @@ div.csl-indent {
 <div id="análisis-factorial-para-datos-mixtos" class="section level2 hasAnchor" number="3.1">
 <h2><span class="header-section-number">3.1</span> Análisis Factorial para Datos Mixtos<a href="análisis-multivariado.html#análisis-factorial-para-datos-mixtos" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Cuando se trabaja con conjuntos de datos mixtos que incluyen tanto variables continuas como categóricas, es recomendable utilizar el <em>Análisis Factorial para Datos Mixtos</em> (FAMD). En R, este análisis se puede realizar mediante el paquete <code>FactoMineR</code> <span class="citation">(<a href="#ref-pages2004">Pages 2004</a>)</span>.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="análisis-multivariado.html#cb6-1" tabindex="-1"></a><span class="co"># FAMD</span></span>
-<span id="cb6-2"><a href="análisis-multivariado.html#cb6-2" tabindex="-1"></a><span class="fu">library</span>(FactoMineR)</span>
-<span id="cb6-3"><a href="análisis-multivariado.html#cb6-3" tabindex="-1"></a><span class="fu">library</span>(factoextra)</span>
-<span id="cb6-4"><a href="análisis-multivariado.html#cb6-4" tabindex="-1"></a></span>
-<span id="cb6-5"><a href="análisis-multivariado.html#cb6-5" tabindex="-1"></a>famd <span class="ot">&lt;-</span> <span class="fu">FAMD</span>(datos_IST_imputados_3, <span class="at">graph =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb6-6"><a href="análisis-multivariado.html#cb6-6" tabindex="-1"></a></span>
-<span id="cb6-7"><a href="análisis-multivariado.html#cb6-7" tabindex="-1"></a><span class="fu">summary</span>(famd)</span></code></pre></div>
-<pre><code>## 
-## Call:
-## FAMD(base = datos_IST_imputados_3, graph = FALSE) 
-## 
-## 
-## Eigenvalues
-##                       Dim.1  Dim.2  Dim.3  Dim.4  Dim.5
-## Variance              3.287  2.055  1.985  1.613  1.060
-## % of var.            23.477 14.675 14.182 11.522  7.573
-## Cumulative % of var. 23.477 38.152 52.334 63.856 71.429
-## 
-## Individuals
-##                          Dist    Dim.1    ctr   cos2    Dim.2    ctr   cos2  
-## 1                    |  3.831 | -2.384 17.286  0.387 |  1.161  6.558  0.092 |
-## 2                    |  3.551 |  1.767  9.503  0.248 |  1.193  6.923  0.113 |
-## 3                    |  3.445 | -0.403  0.495  0.014 | -0.403  0.791  0.014 |
-## 4                    |  3.835 |  0.688  1.441  0.032 |  2.759 37.039  0.517 |
-## 5                    |  3.842 |  2.750 23.005  0.512 |  0.525  1.342  0.019 |
-## 6                    |  3.965 | -2.945 26.387  0.552 |  0.253  0.311  0.004 |
-## 7                    |  3.409 |  0.328  0.327  0.009 | -1.350  8.866  0.157 |
-## 8                    |  3.799 |  2.176 14.400  0.328 | -1.527 11.349  0.162 |
-## 9                    |  3.550 | -0.542  0.893  0.023 | -2.331 26.444  0.431 |
-## 10                   |  4.124 | -1.435  6.264  0.121 | -0.279  0.379  0.005 |
-##                       Dim.3    ctr   cos2  
-## 1                    -1.399  9.853  0.133 |
-## 2                     0.465  1.089  0.017 |
-## 3                    -1.342  9.077  0.152 |
-## 4                     0.215  0.234  0.003 |
-## 5                     0.373  0.699  0.009 |
-## 6                    -0.880  3.897  0.049 |
-## 7                    -0.271  0.369  0.006 |
-## 8                    -1.346  9.131  0.126 |
-## 9                     0.630  1.999  0.031 |
-## 10                    3.555 63.653  0.743 |
-## 
-## Continuous variables
-##                         Dim.1    ctr   cos2    Dim.2    ctr   cos2    Dim.3
-## Libertad_asociacion  |  0.927 26.147  0.859 |  0.046  0.104  0.002 |  0.117
-## Elecciones_limpias   | -0.860 22.505  0.740 |  0.386  7.271  0.149 |  0.176
-## Libertad_expresion   |  0.078  0.183  0.006 |  0.738 26.519  0.545 | -0.651
-## Funcionarias_electas |  0.425  5.483  0.180 |  0.598 17.388  0.357 |  0.668
-## Sufragio             |  0.708 15.256  0.501 | -0.030  0.045  0.001 | -0.268
-##                         ctr   cos2  
-## Libertad_asociacion   0.685  0.014 |
-## Elecciones_limpias    1.554  0.031 |
-## Libertad_expresion   21.331  0.424 |
-## Funcionarias_electas 22.441  0.446 |
-## Sufragio              3.623  0.072 |
-## 
-## Categories
-##                         Dim.1    ctr   cos2 v.test    Dim.2    ctr   cos2
-## Bajor                |  0.328  0.099  0.009  0.181 | -1.350  4.315  0.157
-## Betazed              |  2.176  4.381  0.328  1.200 | -1.527  5.524  0.162
-## Cardassia            |  2.750  6.999  0.512  1.517 |  0.525  0.653  0.019
-## Ferenginar           | -2.945  8.028  0.552 -1.624 |  0.253  0.151  0.004
-## Kronos               |  0.688  0.438  0.032  0.380 |  2.759 18.028  0.517
-## Qo&#39;noS               | -1.435  1.906  0.121 -0.791 | -0.279  0.185  0.005
-## Romulus              | -0.403  0.151  0.014 -0.223 | -0.403  0.385  0.014
-## Tierra               |  1.767  2.891  0.248  0.975 |  1.193  3.370  0.113
-## Trill                | -0.542  0.272  0.023 -0.299 | -2.331 12.871  0.431
-## Vulcano              | -2.384  5.259  0.387 -1.315 |  1.161  3.192  0.092
-##                      v.test    Dim.3    ctr   cos2 v.test  
-## Bajor                -0.942 | -0.271  0.186  0.006 -0.192 |
-## Betazed              -1.065 | -1.346  4.599  0.126 -0.956 |
-## Cardassia             0.366 |  0.373  0.352  0.009  0.264 |
-## Ferenginar            0.176 | -0.880  1.963  0.049 -0.624 |
-## Kronos                1.925 |  0.215  0.118  0.003  0.153 |
-## Qo&#39;noS               -0.195 |  3.555 32.059  0.743  2.523 |
-## Romulus              -0.281 | -1.342  4.572  0.152 -0.953 |
-## Tierra                0.832 |  0.465  0.548  0.017  0.330 |
-## Trill                -1.626 |  0.630  1.007  0.031  0.447 |
-## Vulcano               0.810 | -1.399  4.963  0.133 -0.993 |</code></pre>
-<p>Usualmente se elige un conjunto de dimensiones que explique entre el 70 y 80% de la varianza. A modo de ejemplo, si se escogen las dos primeras dimensiones, estas suman el <code>38.152%</code> de la varianza. En este sentido, las variables<code>libertad de asociación</code> y <code>elecciones limpias</code> son relevantes en la Dimensión 1, así como <code>funcionarias electas</code> y <code>Sufragio</code> en la Dimensión 2. Esto se deduce de la <em>calidad de representación (cos2)</em>. Para mayor información sobre cos2 véase a <span class="citation">(<a href="#ref-Le2008">Lê 2008</a>)</span>.</p>
-<p>Los <em>loadings</em> representan la contribución de cada variable original a las dimensiones. Por ejemplo, la variable <code>Libertad_asociacion</code> tiene una alta contribución en la Dim.1.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="análisis-multivariado.html#cb8-1" tabindex="-1"></a><span class="co"># Loadings</span></span>
-<span id="cb8-2"><a href="análisis-multivariado.html#cb8-2" tabindex="-1"></a>loadings <span class="ot">&lt;-</span> <span class="fu">get_famd_var</span>(famd)<span class="sc">$</span>coord</span>
-<span id="cb8-3"><a href="análisis-multivariado.html#cb8-3" tabindex="-1"></a>loadings <span class="ot">&lt;-</span> loadings[<span class="sc">-</span><span class="fu">which</span>(<span class="fu">rownames</span>(loadings) <span class="sc">==</span> <span class="st">&quot;Planeta&quot;</span>),]</span>
-<span id="cb8-4"><a href="análisis-multivariado.html#cb8-4" tabindex="-1"></a>loadings</span></code></pre></div>
-<pre><code>##                            Dim.1        Dim.2      Dim.3      Dim.4
-## Libertad_asociacion  0.859403579 0.0021354241 0.01360123 0.09784712
-## Elecciones_limpias   0.739699242 0.1493735677 0.03085690 0.05517549
-## Libertad_expresion   0.006017346 0.5448369753 0.42353055 0.02500457
-## Funcionarias_electas 0.180214998 0.3572455191 0.44557449 0.01011586
-## Sufragio             0.501436569 0.0009157346 0.07193614 0.42488273
-##                             Dim.5
-## Libertad_asociacion  0.0270126449
-## Elecciones_limpias   0.0248948089
-## Libertad_expresion   0.0006105661
-## Funcionarias_electas 0.0068491336
-## Sufragio             0.0008288257</code></pre>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="análisis-multivariado.html#cb10-1" tabindex="-1"></a><span class="co"># Grafica de los loadings</span></span>
-<span id="cb10-2"><a href="análisis-multivariado.html#cb10-2" tabindex="-1"></a></span>
-<span id="cb10-3"><a href="análisis-multivariado.html#cb10-3" tabindex="-1"></a><span class="fu">fviz_famd_var</span>(famd, <span class="at">choice =</span> <span class="st">&quot;var&quot;</span>,</span>
-<span id="cb10-4"><a href="análisis-multivariado.html#cb10-4" tabindex="-1"></a>              <span class="at">col.var =</span> <span class="st">&quot;contrib&quot;</span>,</span>
-<span id="cb10-5"><a href="análisis-multivariado.html#cb10-5" tabindex="-1"></a>              <span class="at">gradient.cols =</span> <span class="fu">c</span>(<span class="st">&quot;#00AFBB&quot;</span>, <span class="st">&quot;#E7B800&quot;</span>, <span class="st">&quot;#FC4E07&quot;</span>),</span>
-<span id="cb10-6"><a href="análisis-multivariado.html#cb10-6" tabindex="-1"></a>              <span class="at">repel =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="análisis-multivariado.html#cb8-1" tabindex="-1"></a><span class="co"># FAMD</span></span>
+<span id="cb8-2"><a href="análisis-multivariado.html#cb8-2" tabindex="-1"></a><span class="fu">library</span>(FactoMineR)</span>
+<span id="cb8-3"><a href="análisis-multivariado.html#cb8-3" tabindex="-1"></a><span class="fu">library</span>(factoextra)</span>
+<span id="cb8-4"><a href="análisis-multivariado.html#cb8-4" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="análisis-multivariado.html#cb8-5" tabindex="-1"></a><span class="co"># Convertir las columnas binarias en factores</span></span>
+<span id="cb8-6"><a href="análisis-multivariado.html#cb8-6" tabindex="-1"></a>datos_IST_imputados_3<span class="sc">$</span>Funcionarias_electas <span class="ot">&lt;-</span> <span class="fu">factor</span>(</span>
+<span id="cb8-7"><a href="análisis-multivariado.html#cb8-7" tabindex="-1"></a>  datos_IST_imputados_3<span class="sc">$</span>Funcionarias_electas, </span>
+<span id="cb8-8"><a href="análisis-multivariado.html#cb8-8" tabindex="-1"></a>  <span class="at">levels =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), </span>
+<span id="cb8-9"><a href="análisis-multivariado.html#cb8-9" tabindex="-1"></a>  <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;No_Funcionarias&quot;</span>, <span class="st">&quot;Sí_Funcionarias&quot;</span>)</span>
+<span id="cb8-10"><a href="análisis-multivariado.html#cb8-10" tabindex="-1"></a>)</span>
+<span id="cb8-11"><a href="análisis-multivariado.html#cb8-11" tabindex="-1"></a></span>
+<span id="cb8-12"><a href="análisis-multivariado.html#cb8-12" tabindex="-1"></a>datos_IST_imputados_3<span class="sc">$</span>Sufragio <span class="ot">&lt;-</span> <span class="fu">factor</span>(</span>
+<span id="cb8-13"><a href="análisis-multivariado.html#cb8-13" tabindex="-1"></a>  datos_IST_imputados_3<span class="sc">$</span>Sufragio, </span>
+<span id="cb8-14"><a href="análisis-multivariado.html#cb8-14" tabindex="-1"></a>  <span class="at">levels =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), </span>
+<span id="cb8-15"><a href="análisis-multivariado.html#cb8-15" tabindex="-1"></a>  <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;No_Sufragio&quot;</span>, <span class="st">&quot;Sí_Sufragio&quot;</span>)</span>
+<span id="cb8-16"><a href="análisis-multivariado.html#cb8-16" tabindex="-1"></a>)</span>
+<span id="cb8-17"><a href="análisis-multivariado.html#cb8-17" tabindex="-1"></a></span>
+<span id="cb8-18"><a href="análisis-multivariado.html#cb8-18" tabindex="-1"></a>famd <span class="ot">&lt;-</span> <span class="fu">FAMD</span>(datos_IST_imputados_3 [,<span class="sc">-</span><span class="dv">1</span>], <span class="at">graph =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<p><img src="figures/unnamed-chunk-11-1.png" width="672" /><img src="figures/unnamed-chunk-11-2.png" width="672" /><img src="figures/unnamed-chunk-11-3.png" width="672" /><img src="figures/unnamed-chunk-11-4.png" width="672" /><img src="figures/unnamed-chunk-11-5.png" width="672" />
+Usualmente se elige un conjunto de dimensiones que explique entre el 70 y 80% de la varianza. A modo de ejemplo, si se escogen las dos primeras dimensiones, estas suman el <code>75.776%</code> de la varianza. En este sentido, las variables<code>libertad de asociación</code> y <code>libertad de expresion</code> son relevantes en la Dimensión 1, así como <code>Sufragio</code> en la Dimensión 2. Esto se deduce de la <em>calidad de representación (cos2)</em> y de los <em>loadings</em>. Para mayor información sobre cos2 véase a <span class="citation">(<a href="#ref-Le2008">Lê 2008</a>)</span>.</p>
+<p>Los <em>loadings</em> representan la contribución de cada variable original a las dimensiones.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="análisis-multivariado.html#cb9-1" tabindex="-1"></a><span class="co"># Loadings</span></span>
+<span id="cb9-2"><a href="análisis-multivariado.html#cb9-2" tabindex="-1"></a>loadings <span class="ot">&lt;-</span> <span class="fu">get_famd_var</span>(famd)<span class="sc">$</span>coord</span>
+<span id="cb9-3"><a href="análisis-multivariado.html#cb9-3" tabindex="-1"></a>loadings</span></code></pre></div>
+<pre><code>##                          Dim.1     Dim.2        Dim.3      Dim.4       Dim.5
+## Libertad_asociacion  0.5930745 0.3573779 0.0002116513 0.03491126 0.014424671
+## Elecciones_limpias   0.3976971 0.1723745 0.4052112708 0.01391239 0.010804730
+## Libertad_expresion   0.5076766 0.3923932 0.0492532336 0.03895055 0.011726400
+## Funcionarias_electas 0.1261796 0.3004903 0.5446771862 0.02581813 0.002834842
+## Sufragio             0.4834638 0.4580777 0.0001209539 0.04845307 0.009884514</code></pre>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="análisis-multivariado.html#cb11-1" tabindex="-1"></a><span class="co"># Grafica de los loadings</span></span>
+<span id="cb11-2"><a href="análisis-multivariado.html#cb11-2" tabindex="-1"></a></span>
+<span id="cb11-3"><a href="análisis-multivariado.html#cb11-3" tabindex="-1"></a><span class="fu">fviz_famd_var</span>(famd, <span class="at">choice =</span> <span class="st">&quot;var&quot;</span>,</span>
+<span id="cb11-4"><a href="análisis-multivariado.html#cb11-4" tabindex="-1"></a>              <span class="at">col.var =</span> <span class="st">&quot;contrib&quot;</span>,</span>
+<span id="cb11-5"><a href="análisis-multivariado.html#cb11-5" tabindex="-1"></a>              <span class="at">gradient.cols =</span> <span class="fu">c</span>(<span class="st">&quot;#00AFBB&quot;</span>, <span class="st">&quot;#E7B800&quot;</span>, <span class="st">&quot;#FC4E07&quot;</span>),</span>
+<span id="cb11-6"><a href="análisis-multivariado.html#cb11-6" tabindex="-1"></a>              <span class="at">repel =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <p><img src="figures/unnamed-chunk-13-1.png" width="672" /></p>
-<p>Cada punto representa una variable original del conjunto de datos. La posición de un punto con respecto a los ejes indica cómo contribuye esa variable a cada dimensión. Por ejemplo, las variables <code>Elecciones_limpias</code> y <code>Libertad_asociacion</code> tienen una alta contribución en la Dim1 y baja en la Dim2.</p>
+<p>Cada punto representa una variable original del conjunto de datos. La posición de un punto con respecto a los ejes indica cómo contribuye esa variable a cada dimensión. Por ejemplo, las variables <code>Libertad_expresion</code> y <code>Libertad_asociacion</code> tienen una alta contribución en la Dim1.</p>
 </div>
 </div>
 <h3>References<a href="references.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h3>
