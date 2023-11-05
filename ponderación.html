@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Capítulo 6 Ponderación | Manual de Construcción de Índices Compuestos</title>
+  <meta name="description" content="Guía práctica para crear índices compuestos con R" />
+  <meta name="generator" content="bookdown 0.36 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Capítulo 6 Ponderación | Manual de Construcción de Índices Compuestos" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="Guía práctica para crear índices compuestos con R" />
+  <meta name="github-repo" content="lesflores/composite_indicator_r" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Capítulo 6 Ponderación | Manual de Construcción de Índices Compuestos" />
+  
+  <meta name="twitter:description" content="Guía práctica para crear índices compuestos con R" />
+  
+
+<meta name="author" content="Lesly Estefania Flores" />
+
+
+<meta name="date" content="2023-01-01" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="selección-de-variables.html"/>
+<link rel="next" href="validación.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="styles.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Índices Compuestos</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introducción</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#datos-ficticios-para-la-construcción-del-índice-compuesto"><i class="fa fa-check"></i><b>1.1</b> Datos Ficticios para la Construcción del Índice Compuesto</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="imputación-de-datos-faltantes.html"><a href="imputación-de-datos-faltantes.html"><i class="fa fa-check"></i><b>2</b> Imputación de Datos Faltantes</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="imputación-de-datos-faltantes.html"><a href="imputación-de-datos-faltantes.html#imputación-por-media-y-moda"><i class="fa fa-check"></i><b>2.1</b> Imputación por Media y Moda</a></li>
+<li class="chapter" data-level="2.2" data-path="imputación-de-datos-faltantes.html"><a href="imputación-de-datos-faltantes.html#imputación-por-modelos-de-regresión"><i class="fa fa-check"></i><b>2.2</b> Imputación por Modelos de Regresión</a></li>
+<li class="chapter" data-level="2.3" data-path="imputación-de-datos-faltantes.html"><a href="imputación-de-datos-faltantes.html#paquete-amelia"><i class="fa fa-check"></i><b>2.3</b> Paquete Amelia</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="análisis-multivariado.html"><a href="análisis-multivariado.html"><i class="fa fa-check"></i><b>3</b> Análisis Multivariado</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="análisis-multivariado.html"><a href="análisis-multivariado.html#análisis-factorial-para-datos-mixtos"><i class="fa fa-check"></i><b>3.1</b> Análisis Factorial para Datos Mixtos</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="normalización.html"><a href="normalización.html"><i class="fa fa-check"></i><b>4</b> Normalización</a></li>
+<li class="chapter" data-level="5" data-path="selección-de-variables.html"><a href="selección-de-variables.html"><i class="fa fa-check"></i><b>5</b> Selección de Variables</a></li>
+<li class="chapter" data-level="6" data-path="ponderación.html"><a href="ponderación.html"><i class="fa fa-check"></i><b>6</b> Ponderación</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="ponderación.html"><a href="ponderación.html#ponderación-uniforme"><i class="fa fa-check"></i><b>6.1</b> Ponderación Uniforme</a>
+<ul>
+<li class="chapter" data-level="6.1.1" data-path="ponderación.html"><a href="ponderación.html#inclusión-de-todas-las-variables"><i class="fa fa-check"></i><b>6.1.1</b> Inclusión de Todas las Variables</a></li>
+<li class="chapter" data-level="6.1.2" data-path="ponderación.html"><a href="ponderación.html#puntuaciones-de-las-dimensiones-del-famd"><i class="fa fa-check"></i><b>6.1.2</b> Puntuaciones de las dimensiones del FAMD</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="ponderación.html"><a href="ponderación.html#ponderación-relativa"><i class="fa fa-check"></i><b>6.2</b> Ponderación Relativa</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="validación.html"><a href="validación.html"><i class="fa fa-check"></i><b>7</b> Validación</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Manual de Construcción de Índices Compuestos</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="ponderación" class="section level1 hasAnchor" number="6">
+<h1><span class="header-section-number">Capítulo 6</span> Ponderación<a href="ponderación.html#ponderación" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>Las variables pueden ponderarse de manera uniforme o según su importancia relativa, reflejada en la varianza explicada o en las cargas factoriales. Por ejemplo, en el FAMD, las cargas de las dimensiones pueden extraerse y utilizarse como pesos para las variables correspondientes.</p>
+<div id="ponderación-uniforme" class="section level2 hasAnchor" number="6.1">
+<h2><span class="header-section-number">6.1</span> Ponderación Uniforme<a href="ponderación.html#ponderación-uniforme" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Al crear dos versiones de índices compuestos, la primera utilizando todas las variables normalizadas con valores z y la segunda con las primeras cuatro dimensiones del FAMD que representan el 63.856% de la varianza, se observaron diferencias leves entre los resultados, lo que pone en manifiesto el impacto de la elección de ponderación del índice.</p>
+<div id="inclusión-de-todas-las-variables" class="section level3 hasAnchor" number="6.1.1">
+<h3><span class="header-section-number">6.1.1</span> Inclusión de Todas las Variables<a href="ponderación.html#inclusión-de-todas-las-variables" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Ejemplo de un índice compuesto basado directamente de todas las variables normalizadas con puntajes z.</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="ponderación.html#cb13-1" tabindex="-1"></a><span class="co"># Data frame con los datos normalizados previamente</span></span>
+<span id="cb13-2"><a href="ponderación.html#cb13-2" tabindex="-1"></a>nombres_planetas <span class="ot">&lt;-</span> datos_IST_imputados_3[, <span class="st">&quot;Planeta&quot;</span>]</span>
+<span id="cb13-3"><a href="ponderación.html#cb13-3" tabindex="-1"></a>puntuaciones_1_df <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(datos_normalizados, nombres_planetas)</span>
+<span id="cb13-4"><a href="ponderación.html#cb13-4" tabindex="-1"></a>puntuaciones_1_df</span></code></pre></div>
+<pre><code>##            Libertad_asociacion Elecciones_limpias Libertad_expresion
+## Vulcano             -1.0560953          1.2571845          1.1008321
+## Tierra               0.6481051         -0.2031293          0.3002269
+## Romulus             -0.6470872          0.4471164          0.1000756
+## Kronos               0.9548612          0.1429380          1.5011346
+## Cardassia            0.9834695         -1.2194200          0.1801362
+## Ferenginar          -1.8741115          1.0915620          0.3802874
+## Bajor                0.6484911         -0.8040748         -0.3002269
+## Betazed              0.9889452         -1.3956758         -0.1000756
+## Trill               -0.1699111         -0.5669188         -1.3009833
+## Qo&#39;noS              -0.4766671          1.2504178         -1.8614069</code></pre>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="ponderación.html#cb15-1" tabindex="-1"></a><span class="co"># Suma</span></span>
+<span id="cb15-2"><a href="ponderación.html#cb15-2" tabindex="-1"></a>suma_1 <span class="ot">&lt;-</span> <span class="fu">rowSums</span>(puntuaciones_1_df)</span>
+<span id="cb15-3"><a href="ponderación.html#cb15-3" tabindex="-1"></a>indice_compuesto_1 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(nombres_planetas, suma_1)</span>
+<span id="cb15-4"><a href="ponderación.html#cb15-4" tabindex="-1"></a>indice_compuesto_1 <span class="ot">&lt;-</span> indice_compuesto_1[<span class="fu">order</span>(<span class="sc">-</span>indice_compuesto_1<span class="sc">$</span>suma_1), ]</span>
+<span id="cb15-5"><a href="ponderación.html#cb15-5" tabindex="-1"></a></span>
+<span id="cb15-6"><a href="ponderación.html#cb15-6" tabindex="-1"></a></span>
+<span id="cb15-7"><a href="ponderación.html#cb15-7" tabindex="-1"></a><span class="co">#Índice compuesto</span></span>
+<span id="cb15-8"><a href="ponderación.html#cb15-8" tabindex="-1"></a>indice_compuesto_1</span></code></pre></div>
+<pre><code>##            nombres_planetas      suma_1
+## Kronos               Kronos  2.59893387
+## Vulcano             Vulcano  1.30192125
+## Tierra               Tierra  0.74520281
+## Cardassia         Cardassia -0.05581434
+## Romulus             Romulus -0.09989518
+## Ferenginar       Ferenginar -0.40226209
+## Bajor                 Bajor -0.45581060
+## Betazed             Betazed -0.50680625
+## Qo&#39;noS               Qo&#39;noS -1.08765627
+## Trill                 Trill -2.03781319</code></pre>
+</div>
+<div id="puntuaciones-de-las-dimensiones-del-famd" class="section level3 hasAnchor" number="6.1.2">
+<h3><span class="header-section-number">6.1.2</span> Puntuaciones de las dimensiones del FAMD<a href="ponderación.html#puntuaciones-de-las-dimensiones-del-famd" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Ejemplo de un índice compuesto basado directamente en las puntuaciones de las cuatro primeras dimensiones del FAMD, que suman el <code>63.856%</code> de la varianza, obteninedo la suma para la creación del índice.</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="ponderación.html#cb17-1" tabindex="-1"></a><span class="co"># Peso uniforme</span></span>
+<span id="cb17-2"><a href="ponderación.html#cb17-2" tabindex="-1"></a>peso_uniforme <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">4</span></span>
+<span id="cb17-3"><a href="ponderación.html#cb17-3" tabindex="-1"></a></span>
+<span id="cb17-4"><a href="ponderación.html#cb17-4" tabindex="-1"></a><span class="co"># Puntuaciones de las dimensiones 1 y 2</span></span>
+<span id="cb17-5"><a href="ponderación.html#cb17-5" tabindex="-1"></a>puntuaciones_2 <span class="ot">&lt;-</span> famd<span class="sc">$</span>ind<span class="sc">$</span>coord[, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>]</span>
+<span id="cb17-6"><a href="ponderación.html#cb17-6" tabindex="-1"></a></span>
+<span id="cb17-7"><a href="ponderación.html#cb17-7" tabindex="-1"></a>puntuaciones_2 <span class="ot">&lt;-</span> puntuaciones_2 <span class="sc">*</span> peso_uniforme</span>
+<span id="cb17-8"><a href="ponderación.html#cb17-8" tabindex="-1"></a></span>
+<span id="cb17-9"><a href="ponderación.html#cb17-9" tabindex="-1"></a>puntuaciones_2_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(nombres_planetas, puntuaciones_2)</span>
+<span id="cb17-10"><a href="ponderación.html#cb17-10" tabindex="-1"></a>puntuaciones_2_df</span></code></pre></div>
+<pre><code>##    nombres_planetas       Dim.1      Dim.2       Dim.3       Dim.4
+## 1           Vulcano -0.59589079  0.2901784 -0.34967477 -0.07164488
+## 2            Tierra  0.44182876  0.2981473  0.11622690  0.31463663
+## 3           Romulus -0.10085110 -0.1007843 -0.33561966  0.53016190
+## 4            Kronos  0.17203355  0.6896410  0.05383423 -0.48619197
+## 5         Cardassia  0.68744579  0.1312521  0.09314592  0.13739886
+## 6        Ferenginar -0.73623987  0.0631997 -0.21989731  0.10902110
+## 7             Bajor  0.08191774 -0.3374016 -0.06764464 -0.50613890
+## 8           Betazed  0.54388737 -0.3817383 -0.33661785  0.03171592
+## 9             Trill -0.13541994 -0.5827133  0.15748558 -0.24956231
+## 10           Qo&#39;noS -0.35871151 -0.0697810  0.88876160  0.19060366</code></pre>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="ponderación.html#cb19-1" tabindex="-1"></a><span class="co"># Suma</span></span>
+<span id="cb19-2"><a href="ponderación.html#cb19-2" tabindex="-1"></a>suma_2 <span class="ot">&lt;-</span> <span class="fu">rowSums</span>(puntuaciones_2)</span>
+<span id="cb19-3"><a href="ponderación.html#cb19-3" tabindex="-1"></a>indice_compuesto_2 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(nombres_planetas, suma_2)</span>
+<span id="cb19-4"><a href="ponderación.html#cb19-4" tabindex="-1"></a>indice_compuesto_2 <span class="ot">&lt;-</span> indice_compuesto_2[<span class="fu">order</span>(<span class="sc">-</span>indice_compuesto_2<span class="sc">$</span>suma_2), ]</span>
+<span id="cb19-5"><a href="ponderación.html#cb19-5" tabindex="-1"></a></span>
+<span id="cb19-6"><a href="ponderación.html#cb19-6" tabindex="-1"></a></span>
+<span id="cb19-7"><a href="ponderación.html#cb19-7" tabindex="-1"></a><span class="co">#Índice compuesto</span></span>
+<span id="cb19-8"><a href="ponderación.html#cb19-8" tabindex="-1"></a>indice_compuesto_2</span></code></pre></div>
+<pre><code>##    nombres_planetas       suma_2
+## 2            Tierra  1.170839582
+## 5         Cardassia  1.049242632
+## 10           Qo&#39;noS  0.650872739
+## 4            Kronos  0.429316842
+## 3           Romulus -0.007093133
+## 8           Betazed -0.142752853
+## 1           Vulcano -0.727032038
+## 6        Ferenginar -0.783916371
+## 9             Trill -0.810210023
+## 7             Bajor -0.829267377</code></pre>
+</div>
+</div>
+<div id="ponderación-relativa" class="section level2 hasAnchor" number="6.2">
+<h2><span class="header-section-number">6.2</span> Ponderación Relativa<a href="ponderación.html#ponderación-relativa" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="ponderación.html#cb21-1" tabindex="-1"></a><span class="co"># Cargas factoriales</span></span>
+<span id="cb21-2"><a href="ponderación.html#cb21-2" tabindex="-1"></a>cargas <span class="ot">&lt;-</span> <span class="fu">get_famd_var</span>(famd)<span class="sc">$</span>coord</span>
+<span id="cb21-3"><a href="ponderación.html#cb21-3" tabindex="-1"></a></span>
+<span id="cb21-4"><a href="ponderación.html#cb21-4" tabindex="-1"></a>cargas_dim1_dim2 <span class="ot">&lt;-</span> cargas[, <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>]</span></code></pre></div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="selección-de-variables.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="validación.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/index.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf", "_main.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>
