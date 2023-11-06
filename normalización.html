@@ -180,14 +180,11 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="4" data-path="normalización.html"><a href="normalización.html"><i class="fa fa-check"></i><b>4</b> Normalización</a></li>
 <li class="chapter" data-level="5" data-path="selección-de-variables.html"><a href="selección-de-variables.html"><i class="fa fa-check"></i><b>5</b> Selección de Variables</a></li>
-<li class="chapter" data-level="6" data-path="ponderación.html"><a href="ponderación.html"><i class="fa fa-check"></i><b>6</b> Ponderación</a>
+<li class="chapter" data-level="6" data-path="ponderación-y-agregación.html"><a href="ponderación-y-agregación.html"><i class="fa fa-check"></i><b>6</b> Ponderación y Agregación</a>
 <ul>
-<li class="chapter" data-level="6.1" data-path="ponderación.html"><a href="ponderación.html#ponderación-uniforme"><i class="fa fa-check"></i><b>6.1</b> Ponderación Uniforme</a>
-<ul>
-<li class="chapter" data-level="6.1.1" data-path="ponderación.html"><a href="ponderación.html#inclusión-de-todas-las-variables"><i class="fa fa-check"></i><b>6.1.1</b> Inclusión de Todas las Variables</a></li>
-<li class="chapter" data-level="6.1.2" data-path="ponderación.html"><a href="ponderación.html#puntuaciones-de-las-dimensiones-del-famd"><i class="fa fa-check"></i><b>6.1.2</b> Puntuaciones de las dimensiones del FAMD</a></li>
-</ul></li>
-<li class="chapter" data-level="6.2" data-path="ponderación.html"><a href="ponderación.html#ponderación-relativa"><i class="fa fa-check"></i><b>6.2</b> Ponderación Relativa</a></li>
+<li class="chapter" data-level="6.1" data-path="ponderación-y-agregación.html"><a href="ponderación-y-agregación.html#enfoque-1-inclusión-de-todas-las-variables"><i class="fa fa-check"></i><b>6.1</b> Enfoque 1: Inclusión de todas las Variables</a></li>
+<li class="chapter" data-level="6.2" data-path="ponderación-y-agregación.html"><a href="ponderación-y-agregación.html#enfoque-2-selección-de-las-variables-más-significativas-identificadas-en-el-famd"><i class="fa fa-check"></i><b>6.2</b> Enfoque 2: Selección de las variables más significativas identificadas en el FAMD</a></li>
+<li class="chapter" data-level="6.3" data-path="ponderación-y-agregación.html"><a href="ponderación-y-agregación.html#enfoque-3-varianza-explicativa-famd"><i class="fa fa-check"></i><b>6.3</b> Enfoque 3: Varianza Explicativa FAMD</a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="validación.html"><a href="validación.html"><i class="fa fa-check"></i><b>7</b> Validación</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
@@ -213,17 +210,18 @@ div.csl-indent {
             <section class="normal" id="section-">
 <div id="normalización" class="section level1 hasAnchor" number="4">
 <h1><span class="header-section-number">Capítulo 4</span> Normalización<a href="normalización.html#normalización" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>La aplicación de FAMD no se requiere normalizar ni escalar los datos previamente, dado que FactoMineR realiza la normalización de las variables continuas transformándolas en z-scores y codifica las variables categóricas.</p>
+<p><strong>incompleto</strong>
+La aplicación de FAMD no se requiere normalizar ni escalar los datos previamente, dado que FactoMineR realiza la normalización de las variables continuas transformándolas en z-scores y codifica las variables categóricas.</p>
 <p>Para otros análisis, las variables continuas pueden convertirse a z-scores para homogeneizar la escala, mientras que las variables dicotómicas se utilizan tal como están.</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="normalización.html#cb12-1" tabindex="-1"></a><span class="co"># Variables continuas</span></span>
-<span id="cb12-2"><a href="normalización.html#cb12-2" tabindex="-1"></a>datos_continuos <span class="ot">&lt;-</span> datos_IST_imputados_3[, <span class="fu">c</span>(<span class="st">&quot;Libertad_asociacion&quot;</span>, <span class="st">&quot;Elecciones_limpias&quot;</span>, <span class="st">&quot;Libertad_expresion&quot;</span>)]</span>
-<span id="cb12-3"><a href="normalización.html#cb12-3" tabindex="-1"></a></span>
-<span id="cb12-4"><a href="normalización.html#cb12-4" tabindex="-1"></a><span class="co"># Normalización</span></span>
-<span id="cb12-5"><a href="normalización.html#cb12-5" tabindex="-1"></a>datos_normalizados <span class="ot">&lt;-</span> <span class="fu">scale</span>(datos_continuos)</span>
-<span id="cb12-6"><a href="normalización.html#cb12-6" tabindex="-1"></a></span>
-<span id="cb12-7"><a href="normalización.html#cb12-7" tabindex="-1"></a>datos_IST_imputados_3[, <span class="fu">c</span>(<span class="st">&quot;Libertad_asociacion&quot;</span>, <span class="st">&quot;Elecciones_limpias&quot;</span>, <span class="st">&quot;Libertad_expresion&quot;</span>)] <span class="ot">&lt;-</span> datos_normalizados</span>
-<span id="cb12-8"><a href="normalización.html#cb12-8" tabindex="-1"></a></span>
-<span id="cb12-9"><a href="normalización.html#cb12-9" tabindex="-1"></a>datos_normalizados</span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="normalización.html#cb16-1" tabindex="-1"></a><span class="co"># Variables continuas</span></span>
+<span id="cb16-2"><a href="normalización.html#cb16-2" tabindex="-1"></a>datos_continuos <span class="ot">&lt;-</span> datos_IST_imputados_3[, <span class="fu">c</span>(<span class="st">&quot;Libertad_asociacion&quot;</span>, <span class="st">&quot;Elecciones_limpias&quot;</span>, <span class="st">&quot;Libertad_expresion&quot;</span>)]</span>
+<span id="cb16-3"><a href="normalización.html#cb16-3" tabindex="-1"></a></span>
+<span id="cb16-4"><a href="normalización.html#cb16-4" tabindex="-1"></a><span class="co"># Normalización</span></span>
+<span id="cb16-5"><a href="normalización.html#cb16-5" tabindex="-1"></a>datos_normalizados <span class="ot">&lt;-</span> <span class="fu">scale</span>(datos_continuos)</span>
+<span id="cb16-6"><a href="normalización.html#cb16-6" tabindex="-1"></a></span>
+<span id="cb16-7"><a href="normalización.html#cb16-7" tabindex="-1"></a>datos_IST_imputados_3[, <span class="fu">c</span>(<span class="st">&quot;Libertad_asociacion&quot;</span>, <span class="st">&quot;Elecciones_limpias&quot;</span>, <span class="st">&quot;Libertad_expresion&quot;</span>)] <span class="ot">&lt;-</span> datos_normalizados</span>
+<span id="cb16-8"><a href="normalización.html#cb16-8" tabindex="-1"></a></span>
+<span id="cb16-9"><a href="normalización.html#cb16-9" tabindex="-1"></a>datos_normalizados</span></code></pre></div>
 <pre><code>##       Libertad_asociacion Elecciones_limpias Libertad_expresion
 ##  [1,]          -0.9983742          1.2570692         1.04480400
 ##  [2,]           0.8642586         -0.2031057         0.43948381

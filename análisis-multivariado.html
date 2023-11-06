@@ -180,14 +180,11 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="4" data-path="normalización.html"><a href="normalización.html"><i class="fa fa-check"></i><b>4</b> Normalización</a></li>
 <li class="chapter" data-level="5" data-path="selección-de-variables.html"><a href="selección-de-variables.html"><i class="fa fa-check"></i><b>5</b> Selección de Variables</a></li>
-<li class="chapter" data-level="6" data-path="ponderación.html"><a href="ponderación.html"><i class="fa fa-check"></i><b>6</b> Ponderación</a>
+<li class="chapter" data-level="6" data-path="ponderación-y-agregación.html"><a href="ponderación-y-agregación.html"><i class="fa fa-check"></i><b>6</b> Ponderación y Agregación</a>
 <ul>
-<li class="chapter" data-level="6.1" data-path="ponderación.html"><a href="ponderación.html#ponderación-uniforme"><i class="fa fa-check"></i><b>6.1</b> Ponderación Uniforme</a>
-<ul>
-<li class="chapter" data-level="6.1.1" data-path="ponderación.html"><a href="ponderación.html#inclusión-de-todas-las-variables"><i class="fa fa-check"></i><b>6.1.1</b> Inclusión de Todas las Variables</a></li>
-<li class="chapter" data-level="6.1.2" data-path="ponderación.html"><a href="ponderación.html#puntuaciones-de-las-dimensiones-del-famd"><i class="fa fa-check"></i><b>6.1.2</b> Puntuaciones de las dimensiones del FAMD</a></li>
-</ul></li>
-<li class="chapter" data-level="6.2" data-path="ponderación.html"><a href="ponderación.html#ponderación-relativa"><i class="fa fa-check"></i><b>6.2</b> Ponderación Relativa</a></li>
+<li class="chapter" data-level="6.1" data-path="ponderación-y-agregación.html"><a href="ponderación-y-agregación.html#enfoque-1-inclusión-de-todas-las-variables"><i class="fa fa-check"></i><b>6.1</b> Enfoque 1: Inclusión de todas las Variables</a></li>
+<li class="chapter" data-level="6.2" data-path="ponderación-y-agregación.html"><a href="ponderación-y-agregación.html#enfoque-2-selección-de-las-variables-más-significativas-identificadas-en-el-famd"><i class="fa fa-check"></i><b>6.2</b> Enfoque 2: Selección de las variables más significativas identificadas en el FAMD</a></li>
+<li class="chapter" data-level="6.3" data-path="ponderación-y-agregación.html"><a href="ponderación-y-agregación.html#enfoque-3-varianza-explicativa-famd"><i class="fa fa-check"></i><b>6.3</b> Enfoque 3: Varianza Explicativa FAMD</a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="validación.html"><a href="validación.html"><i class="fa fa-check"></i><b>7</b> Validación</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
@@ -213,15 +210,15 @@ div.csl-indent {
             <section class="normal" id="section-">
 <div id="análisis-multivariado" class="section level1 hasAnchor" number="3">
 <h1><span class="header-section-number">Capítulo 3</span> Análisis Multivariado<a href="análisis-multivariado.html#análisis-multivariado" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>En la construcción de índices compuestos, la reducción de la dimensionalidad, utilizando técnicas como el Análisis de Componentes Principales (ACP) o el Análisis Factorial (AF), facilita la síntesis de información de varias variables al extraer factores clave que reflejan la esencia de los datos. Al aplicar ACP, por ejemplo, podemos concentrarnos en los componentes principales que retienen la mayor parte de la información útil, lo que nos ayuda a construir un índice más robusto y representativo. Por su parte, el AF va más allá al intentar identificar las estructuras subyacentes que explican las correlaciones entre las variables, lo que permite descubrir factores latentes que pueden no ser directamente observables. Para datos mixtos, que combinan variables continuas y categóricas, se emplea el Análisis Factorial para Datos Mixtos (FAMD), una extensión de las técnicas de análisis factorial que puede manejar la presencia de diferentes tipos de datos en el conjunto de datos.</p>
+<p>En la construcción de índices compuestos, técnicas de reducción de dimensionalidad como el Análisis de Componentes Principales (ACP) para variables cuantitativas y el Análisis de Correspondencias Múltiples (ACM) para variables cualitativas se emplean para sintetizar la información de múltiples variables. Estas técnicas extraen dimensiones principales que capturan la mayor variabilidad posible de los datos. Para conjuntos de datos que contienen tanto variables cuantitativas como cualitativas, se recomienda el Análisis Factorial para Datos Mixtos (FAMD), que combina los principios del ACP y ACM en un solo marco de análisis. Esta técnica permite analizar simultáneamente ambos tipos de variables y descubrir estructuras subyacentes en el conjunto de datos.</p>
 <div id="análisis-factorial-para-datos-mixtos" class="section level2 hasAnchor" number="3.1">
 <h2><span class="header-section-number">3.1</span> Análisis Factorial para Datos Mixtos<a href="análisis-multivariado.html#análisis-factorial-para-datos-mixtos" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Cuando se trabaja con conjuntos de datos mixtos que incluyen tanto variables continuas como categóricas, es recomendable utilizar el <em>Análisis Factorial para Datos Mixtos</em> (FAMD). En R, este análisis se puede realizar mediante el paquete <code>FactoMineR</code> <span class="citation">(<a href="#ref-pages2004">Pages 2004</a>)</span>.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="análisis-multivariado.html#cb8-1" tabindex="-1"></a><span class="co"># FAMD</span></span>
+<p>Cuando se trabaja con conjuntos de datos mixtos que incluyen tanto variables continuas como categóricas, es recomendable utilizar el <em>Análisis Factorial para Datos Mixtos</em> (FAMD). En R, este análisis se puede realizar mediante el paquete <code>FactoMineR</code> <span class="citation">(<a href="#ref-pages2004">Pages 2004</a>)</span>. Para mayor información sobre famd véase también a <span class="citation">(<a href="#ref-Le2008">Lê 2008</a>)</span>.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="análisis-multivariado.html#cb8-1" tabindex="-1"></a><span class="co"># FactoMineR</span></span>
 <span id="cb8-2"><a href="análisis-multivariado.html#cb8-2" tabindex="-1"></a><span class="fu">library</span>(FactoMineR)</span>
 <span id="cb8-3"><a href="análisis-multivariado.html#cb8-3" tabindex="-1"></a><span class="fu">library</span>(factoextra)</span>
 <span id="cb8-4"><a href="análisis-multivariado.html#cb8-4" tabindex="-1"></a></span>
-<span id="cb8-5"><a href="análisis-multivariado.html#cb8-5" tabindex="-1"></a><span class="co"># Convertir las columnas binarias en factores</span></span>
+<span id="cb8-5"><a href="análisis-multivariado.html#cb8-5" tabindex="-1"></a><span class="co"># Convertir las columnas binarias en factores (las variables cualitativas deben ser factores en FAMD)</span></span>
 <span id="cb8-6"><a href="análisis-multivariado.html#cb8-6" tabindex="-1"></a>datos_IST_imputados_3<span class="sc">$</span>Funcionarias_electas <span class="ot">&lt;-</span> <span class="fu">factor</span>(</span>
 <span id="cb8-7"><a href="análisis-multivariado.html#cb8-7" tabindex="-1"></a>  datos_IST_imputados_3<span class="sc">$</span>Funcionarias_electas, </span>
 <span id="cb8-8"><a href="análisis-multivariado.html#cb8-8" tabindex="-1"></a>  <span class="at">levels =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), </span>
@@ -234,27 +231,39 @@ div.csl-indent {
 <span id="cb8-15"><a href="análisis-multivariado.html#cb8-15" tabindex="-1"></a>  <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;No_Sufragio&quot;</span>, <span class="st">&quot;Sí_Sufragio&quot;</span>)</span>
 <span id="cb8-16"><a href="análisis-multivariado.html#cb8-16" tabindex="-1"></a>)</span>
 <span id="cb8-17"><a href="análisis-multivariado.html#cb8-17" tabindex="-1"></a></span>
-<span id="cb8-18"><a href="análisis-multivariado.html#cb8-18" tabindex="-1"></a>famd <span class="ot">&lt;-</span> <span class="fu">FAMD</span>(datos_IST_imputados_3 [,<span class="sc">-</span><span class="dv">1</span>], <span class="at">graph =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
-<p><img src="figures/unnamed-chunk-11-1.png" width="672" /><img src="figures/unnamed-chunk-11-2.png" width="672" /><img src="figures/unnamed-chunk-11-3.png" width="672" /><img src="figures/unnamed-chunk-11-4.png" width="672" /><img src="figures/unnamed-chunk-11-5.png" width="672" />
-Usualmente se elige un conjunto de dimensiones que explique entre el 70 y 80% de la varianza. A modo de ejemplo, si se escogen las dos primeras dimensiones, estas suman el <code>75.776%</code> de la varianza. En este sentido, las variables<code>libertad de asociación</code> y <code>libertad de expresion</code> son relevantes en la Dimensión 1, así como <code>Sufragio</code> en la Dimensión 2. Esto se deduce de la <em>calidad de representación (cos2)</em> y de los <em>loadings</em>. Para mayor información sobre cos2 véase a <span class="citation">(<a href="#ref-Le2008">Lê 2008</a>)</span>.</p>
-<p>Los <em>loadings</em> representan la contribución de cada variable original a las dimensiones.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="análisis-multivariado.html#cb9-1" tabindex="-1"></a><span class="co"># Loadings</span></span>
-<span id="cb9-2"><a href="análisis-multivariado.html#cb9-2" tabindex="-1"></a>loadings <span class="ot">&lt;-</span> <span class="fu">get_famd_var</span>(famd)<span class="sc">$</span>coord</span>
-<span id="cb9-3"><a href="análisis-multivariado.html#cb9-3" tabindex="-1"></a>loadings</span></code></pre></div>
-<pre><code>##                          Dim.1     Dim.2        Dim.3      Dim.4       Dim.5
-## Libertad_asociacion  0.5930745 0.3573779 0.0002116513 0.03491126 0.014424671
-## Elecciones_limpias   0.3976971 0.1723745 0.4052112708 0.01391239 0.010804730
-## Libertad_expresion   0.5076766 0.3923932 0.0492532336 0.03895055 0.011726400
-## Funcionarias_electas 0.1261796 0.3004903 0.5446771862 0.02581813 0.002834842
-## Sufragio             0.4834638 0.4580777 0.0001209539 0.04845307 0.009884514</code></pre>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="análisis-multivariado.html#cb11-1" tabindex="-1"></a><span class="co"># Grafica de los loadings</span></span>
-<span id="cb11-2"><a href="análisis-multivariado.html#cb11-2" tabindex="-1"></a></span>
-<span id="cb11-3"><a href="análisis-multivariado.html#cb11-3" tabindex="-1"></a><span class="fu">fviz_famd_var</span>(famd, <span class="at">choice =</span> <span class="st">&quot;var&quot;</span>,</span>
-<span id="cb11-4"><a href="análisis-multivariado.html#cb11-4" tabindex="-1"></a>              <span class="at">col.var =</span> <span class="st">&quot;contrib&quot;</span>,</span>
-<span id="cb11-5"><a href="análisis-multivariado.html#cb11-5" tabindex="-1"></a>              <span class="at">gradient.cols =</span> <span class="fu">c</span>(<span class="st">&quot;#00AFBB&quot;</span>, <span class="st">&quot;#E7B800&quot;</span>, <span class="st">&quot;#FC4E07&quot;</span>),</span>
-<span id="cb11-6"><a href="análisis-multivariado.html#cb11-6" tabindex="-1"></a>              <span class="at">repel =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<span id="cb8-18"><a href="análisis-multivariado.html#cb8-18" tabindex="-1"></a><span class="co"># FAMD</span></span>
+<span id="cb8-19"><a href="análisis-multivariado.html#cb8-19" tabindex="-1"></a></span>
+<span id="cb8-20"><a href="análisis-multivariado.html#cb8-20" tabindex="-1"></a>famd <span class="ot">&lt;-</span> <span class="fu">FAMD</span>(datos_IST_imputados_3 [,<span class="sc">-</span><span class="dv">1</span>], <span class="at">graph =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<p>Usualmente se elige un conjunto de dimensiones que explique entre el 70 y 80% de la varianza. A modo de ejemplo, si se escogen las dos primeras dimensiones, estas suman el <code>75.776%</code> de la varianza.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="análisis-multivariado.html#cb9-1" tabindex="-1"></a><span class="co"># eigenvalues (valores propios)</span></span>
+<span id="cb9-2"><a href="análisis-multivariado.html#cb9-2" tabindex="-1"></a>eigenvalues <span class="ot">&lt;-</span> <span class="fu">get_eigenvalue</span>(famd)</span>
+<span id="cb9-3"><a href="análisis-multivariado.html#cb9-3" tabindex="-1"></a>eigenvalues</span></code></pre></div>
+<pre><code>##       eigenvalue variance.percent cumulative.variance.percent
+## Dim.1 2.10809159       42.1618318                    42.16183
+## Dim.2 1.68071357       33.6142713                    75.77610
+## Dim.3 0.99947430       19.9894859                    95.76559
+## Dim.4 0.16204539        3.2409078                    99.00650
+## Dim.5 0.04967516        0.9935032                   100.00000</code></pre>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="análisis-multivariado.html#cb11-1" tabindex="-1"></a><span class="co"># Gráfico eigenvalues (valores propios)</span></span>
+<span id="cb11-2"><a href="análisis-multivariado.html#cb11-2" tabindex="-1"></a><span class="fu">fviz_eig</span>(famd)</span></code></pre></div>
 <p><img src="figures/unnamed-chunk-13-1.png" width="672" /></p>
-<p>Cada punto representa una variable original del conjunto de datos. La posición de un punto con respecto a los ejes indica cómo contribuye esa variable a cada dimensión. Por ejemplo, las variables <code>Libertad_expresion</code> y <code>Libertad_asociacion</code> tienen una alta contribución en la Dim1.</p>
+<p>El eje horizontal (Dim1) representa la primera dimensión y explica el 42.2% de la variabilidad en los datos, mientras que el eje vertical (Dim2) representa la segunda dimensión y explica el 33.6%. Los puntos rojos indican la posición de cada variable en estas dos dimensiones. <code>Libertad_asociacion</code> y <code>Elecciones_limpias</code> tienen una fuerte asociación con la primera dimensión. <code>Funcionarias_electas</code> está más relacionada con la segunda dimensión.</p>
+<p>La posición de las variables en el gráfico ayuda a comprender su contribución a la estructura de los datos.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="análisis-multivariado.html#cb12-1" tabindex="-1"></a><span class="co"># Gráfico de las variables en el plano factorial</span></span>
+<span id="cb12-2"><a href="análisis-multivariado.html#cb12-2" tabindex="-1"></a><span class="fu">fviz_famd_var</span>(famd, <span class="at">choice =</span> <span class="st">&quot;var&quot;</span>, <span class="at">repel =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<p><img src="figures/unnamed-chunk-14-1.png" width="672" /></p>
+<p>Este gráfico representa la dispersión de las observaciones, cada punto corresponde a un planeta, ubicado de acuerdo con los valores que toma en las dos dimensiones consideradas más explicativas de la variabilidad en los datos. Por ejemplo, los planetas marcados con 1 y 6 están cerca en el espacio de la dimensión, lo que indica que tienen perfiles similares en términos de las variables estudiadas. Por otro lado, los planetas que están más alejados en el gráfico, como los puntos 10 y 7, tendrían características distintas.</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="análisis-multivariado.html#cb13-1" tabindex="-1"></a><span class="co"># Gráfico eigenvalues (valores propios)</span></span>
+<span id="cb13-2"><a href="análisis-multivariado.html#cb13-2" tabindex="-1"></a><span class="fu">fviz_famd_ind</span>(famd, <span class="at">invisible =</span> <span class="st">&quot;quali.var&quot;</span>, <span class="at">repel =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<p><img src="figures/unnamed-chunk-15-1.png" width="672" /></p>
+<p>El gráfico muestra cómo cada variable influye en la primera dimensión del FAMD. <code>Libertad_asociacion</code> y <code>Libertad_expresion</code> son las más influyentes, mientras que <code>Funcionarias_electas</code> contribuye menos.</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="análisis-multivariado.html#cb14-1" tabindex="-1"></a><span class="co"># Contribución de las variables a la dim 1</span></span>
+<span id="cb14-2"><a href="análisis-multivariado.html#cb14-2" tabindex="-1"></a><span class="fu">fviz_contrib</span>(famd, <span class="at">choice =</span> <span class="st">&quot;var&quot;</span>, <span class="at">axes =</span> <span class="dv">1</span>)</span></code></pre></div>
+<p><img src="figures/unnamed-chunk-16-1.png" width="672" /></p>
+<p>Este gráfico muestra las contribuciones de las variables a la segunda dimensión, de manera similar al gráfico anterior que se enfocaba en la primera dimensión. <code>Sufragio</code> domina esta dimensión.</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="análisis-multivariado.html#cb15-1" tabindex="-1"></a><span class="co"># Contribución de las variables a la dim 2</span></span>
+<span id="cb15-2"><a href="análisis-multivariado.html#cb15-2" tabindex="-1"></a><span class="fu">fviz_contrib</span>(famd, <span class="at">choice =</span> <span class="st">&quot;var&quot;</span>, <span class="at">axes =</span> <span class="dv">2</span>)</span></code></pre></div>
+<p><img src="figures/unnamed-chunk-17-1.png" width="672" /></p>
 </div>
 </div>
 <h3>References<a href="references.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h3>
