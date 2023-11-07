@@ -22,3 +22,4 @@ ponderación-y-agregación
 enfoque-1-inclusión-de-todas-las-variables
 enfoque-2-selección-de-las-variables-más-significativas-identificadas-en-el-famd
 enfoque-3-varianza-explicativa-famd
+sobre-este-manual
