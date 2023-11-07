@@ -212,16 +212,17 @@ div.csl-indent {
 <h1><span class="header-section-number">Capítulo 4</span> Normalización<a href="normalización.html#normalización" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p><strong>incompleto</strong>
 La aplicación de FAMD no se requiere normalizar ni escalar los datos previamente, dado que FactoMineR realiza la normalización de las variables continuas transformándolas en z-scores y codifica las variables categóricas.</p>
-<p>Para otros análisis, las variables continuas pueden convertirse a z-scores para homogeneizar la escala, mientras que las variables dicotómicas se utilizan tal como están.</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="normalización.html#cb16-1" tabindex="-1"></a><span class="co"># Variables continuas</span></span>
-<span id="cb16-2"><a href="normalización.html#cb16-2" tabindex="-1"></a>datos_continuos <span class="ot">&lt;-</span> datos_IST_imputados_3[, <span class="fu">c</span>(<span class="st">&quot;Libertad_asociacion&quot;</span>, <span class="st">&quot;Elecciones_limpias&quot;</span>, <span class="st">&quot;Libertad_expresion&quot;</span>)]</span>
-<span id="cb16-3"><a href="normalización.html#cb16-3" tabindex="-1"></a></span>
-<span id="cb16-4"><a href="normalización.html#cb16-4" tabindex="-1"></a><span class="co"># Normalización</span></span>
-<span id="cb16-5"><a href="normalización.html#cb16-5" tabindex="-1"></a>datos_normalizados <span class="ot">&lt;-</span> <span class="fu">scale</span>(datos_continuos)</span>
-<span id="cb16-6"><a href="normalización.html#cb16-6" tabindex="-1"></a></span>
-<span id="cb16-7"><a href="normalización.html#cb16-7" tabindex="-1"></a>datos_IST_imputados_3[, <span class="fu">c</span>(<span class="st">&quot;Libertad_asociacion&quot;</span>, <span class="st">&quot;Elecciones_limpias&quot;</span>, <span class="st">&quot;Libertad_expresion&quot;</span>)] <span class="ot">&lt;-</span> datos_normalizados</span>
-<span id="cb16-8"><a href="normalización.html#cb16-8" tabindex="-1"></a></span>
-<span id="cb16-9"><a href="normalización.html#cb16-9" tabindex="-1"></a>datos_normalizados</span></code></pre></div>
+<p>Sin embargo, para otros análisis en los que esta normalización automática no ocurre, es recomendable estandarizar las variables continuas manualmente. Las variables continuas pueden convertirse a z-scores para homogeneizar la escala, mientras que las variables dicotómicas (0 y 1) se utilizan tal como están.</p>
+<p>En el siguiente código en R, se aplicó la función <code>scale</code> para convertir las variables continuas en z-scores, proceso que centra la media en 0 y la desviación estándar en 1.</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="normalización.html#cb14-1" tabindex="-1"></a><span class="co"># Variables continuas</span></span>
+<span id="cb14-2"><a href="normalización.html#cb14-2" tabindex="-1"></a>datos_continuos <span class="ot">&lt;-</span> datos_IST_imputados_3[, <span class="fu">c</span>(<span class="st">&quot;Libertad_asociacion&quot;</span>, <span class="st">&quot;Elecciones_limpias&quot;</span>, <span class="st">&quot;Libertad_expresion&quot;</span>)]</span>
+<span id="cb14-3"><a href="normalización.html#cb14-3" tabindex="-1"></a></span>
+<span id="cb14-4"><a href="normalización.html#cb14-4" tabindex="-1"></a><span class="co"># Normalización</span></span>
+<span id="cb14-5"><a href="normalización.html#cb14-5" tabindex="-1"></a>datos_normalizados <span class="ot">&lt;-</span> <span class="fu">scale</span>(datos_continuos)</span>
+<span id="cb14-6"><a href="normalización.html#cb14-6" tabindex="-1"></a></span>
+<span id="cb14-7"><a href="normalización.html#cb14-7" tabindex="-1"></a>datos_IST_imputados_3[, <span class="fu">c</span>(<span class="st">&quot;Libertad_asociacion&quot;</span>, <span class="st">&quot;Elecciones_limpias&quot;</span>, <span class="st">&quot;Libertad_expresion&quot;</span>)] <span class="ot">&lt;-</span> datos_normalizados</span>
+<span id="cb14-8"><a href="normalización.html#cb14-8" tabindex="-1"></a></span>
+<span id="cb14-9"><a href="normalización.html#cb14-9" tabindex="-1"></a>datos_normalizados</span></code></pre></div>
 <pre><code>##       Libertad_asociacion Elecciones_limpias Libertad_expresion
 ##  [1,]          -0.9983742          1.2570692         1.04480400
 ##  [2,]           0.8642586         -0.2031057         0.43948381

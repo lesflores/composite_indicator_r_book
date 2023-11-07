@@ -210,12 +210,14 @@ div.csl-indent {
             <section class="normal" id="section-">
 <div id="imputación-de-datos-faltantes" class="section level1 hasAnchor" number="2">
 <h1><span class="header-section-number">Capítulo 2</span> Imputación de Datos Faltantes<a href="imputación-de-datos-faltantes.html#imputación-de-datos-faltantes" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>La ausencia de datos puede abordarse de dos maneras: eliminando las observaciones con datos faltantes o aplicando técnicas de imputación para estimar los valores ausentes. Esta sección se centra en métodos de imputación que permiten utilizar todos los casos disponibles en el conjunto de datos.</p>
+<p>La ausencia de datos puede abordarse de dos maneras: <em>eliminando las observaciones con datos faltantes</em> o <em>aplicando técnicas de imputación</em> para estimar los valores ausentes. Esta sección se centra en métodos de imputación que permiten utilizar todos los casos disponibles en el conjunto de datos.</p>
+<p>Durante esta práctica, aplicaremos la imputación por la media para datos continuos con una distribución uniforme y la moda para datos categóricos. También aplicaremos métodos de regresión lineal y logística para estimar los valores faltantes, basándonos en relaciones observadas entre las variables.</p>
 <p>Es importante mencionar que cada método de imputación tiene sus propias fortalezas y limitaciones y debe elegirse con cuidado, teniendo en cuenta la naturaleza de los datos y el patrón de datos faltantes.</p>
 <div id="imputación-por-media-y-moda" class="section level2 hasAnchor" number="2.1">
 <h2><span class="header-section-number">2.1</span> Imputación por Media y Moda<a href="imputación-de-datos-faltantes.html#imputación-por-media-y-moda" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Para datos númericos que siguen una distribución normal, la imputación se puede realizar empleado la media que sustituye los valores faltantes con la media aritmética de las observaciones disponibles.</p>
 <p>En el caso de los datos categóricos, la imputación se puede realizar empleando la moda, que es el valor más frecuente en el conjunto de datos.</p>
+<p>En el siguiente código de R, utilizamos la función <code>mean</code> para calcular la media de la variable cuantitativa <code>Libertad_asociacion</code>, excluyendo los valores NA con el argumento <code>na.rm = TRUE</code>. De manera similar, calculamos la moda para la variable categórica <code>Sufragio</code> usando la función <code>Mode</code> de la librería <code>DescTools</code>. Estos valores calculados se utilizan para sustituir los datos faltantes en el conjunto de datos datos_IST.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="imputación-de-datos-faltantes.html#cb2-1" tabindex="-1"></a><span class="co"># Librería para calcular la moda</span></span>
 <span id="cb2-2"><a href="imputación-de-datos-faltantes.html#cb2-2" tabindex="-1"></a><span class="fu">library</span>(DescTools)</span>
 <span id="cb2-3"><a href="imputación-de-datos-faltantes.html#cb2-3" tabindex="-1"></a></span>
@@ -467,7 +469,8 @@ Qo’noS
 <h2><span class="header-section-number">2.2</span> Imputación por Modelos de Regresión<a href="imputación-de-datos-faltantes.html#imputación-por-modelos-de-regresión" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>La regresión lineal puede emplearse para predecir y reemplazar datos faltantes cuando existe una relación lineal entre variables. Este método presupone que los datos faltan al azar, lo que implica que la ausencia de datos está asociada únicamente con variables observables y no con los valores faltantes.</p>
 <p>Además de asumir el azar en los datos faltantes, los modelos de regresión presuponen una distribución normal de los residuos. Estos modelos se pueden adaptar para datos continuos, discretos y categóricos (mediante modelos logit o probit).</p>
-<p>Para identificar la mejor variable predictora, se recomienda realizar un análisis de correlación que permita detectar la correlación más fuerte. En este manual se ilustran con la regresión lineal simple y regresión logística simple, sin embargo, si se observan correlaciones altas, también es posible aplicar modelos de regresión múltiple.</p>
+<p>Para identificar la mejor variable predictora, se recomienda realizar un análisis de correlación que permita detectar la correlación más fuerte. En este manual se ilustran con la regresión lineal simple y regresión logística simple, sin embargo, si se observan más variables con correlaciones altas, también es posible aplicar modelos de regresión múltiple.</p>
+<p>En el siguiente código de R, utilizamos la función <code>cor</code> para calcular las correlaciones de Spearman y visualizamos la matriz de correlación usando <code>ggcorrplot</code>.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="imputación-de-datos-faltantes.html#cb3-1" tabindex="-1"></a><span class="fu">library</span>(ggcorrplot)</span>
 <span id="cb3-2"><a href="imputación-de-datos-faltantes.html#cb3-2" tabindex="-1"></a></span>
 <span id="cb3-3"><a href="imputación-de-datos-faltantes.html#cb3-3" tabindex="-1"></a><span class="co"># Correlación de Spearman para variables continuas y dicotómicas </span></span>
@@ -479,8 +482,8 @@ Qo’noS
 <span id="cb3-9"><a href="imputación-de-datos-faltantes.html#cb3-9" tabindex="-1"></a>                     <span class="at">method =</span> <span class="st">&quot;spearman&quot;</span>, <span class="at">use =</span> <span class="st">&quot;complete.obs&quot;</span>)<span class="sc">%&gt;%</span> <span class="fu">round</span>(<span class="dv">1</span>)</span>
 <span id="cb3-10"><a href="imputación-de-datos-faltantes.html#cb3-10" tabindex="-1"></a></span>
 <span id="cb3-11"><a href="imputación-de-datos-faltantes.html#cb3-11" tabindex="-1"></a><span class="fu">ggcorrplot</span>(correlaciones,<span class="at">type=</span><span class="st">&quot;lower&quot;</span>,<span class="at">lab=</span>T,<span class="at">show.legend=</span>T)</span></code></pre></div>
-<p><img src="figures/unnamed-chunk-6-1.png" width="672" />
-Seleccionamos <code>Elecciones_limpias</code> para imputar valores en <code>Libertad_asociacion</code> utilizando la regresión lineal, debido a la correlación moderada de -0.6 que esta variable tiene con la libertad de asociarse.</p>
+<p><img src="figures/unnamed-chunk-6-1.png" width="672" /></p>
+<p>Seleccionamos <code>Elecciones_limpias</code> para imputar valores en <code>Libertad_asociacion</code> en una regresión lineal, utilizando la función <code>lm</code>. Esta decisión de basa en la correlación moderada de -0.6 entre ambas variables.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="imputación-de-datos-faltantes.html#cb4-1" tabindex="-1"></a><span class="co"># Modelo lm</span></span>
 <span id="cb4-2"><a href="imputación-de-datos-faltantes.html#cb4-2" tabindex="-1"></a>datos_IST_imputados_2 <span class="ot">&lt;-</span> datos_IST</span>
 <span id="cb4-3"><a href="imputación-de-datos-faltantes.html#cb4-3" tabindex="-1"></a></span>
@@ -722,17 +725,17 @@ Qo’noS
 </tbody>
 </table>
 </div>
-<p>Para imputar <code>Sufragio</code>, aplicamos regresión logística con <code>Libertad_expresion</code> como predictor,con una correlación de 0.8, para predecir la probabilidad de categorías binarias.</p>
+<p>Para imputar <code>Sufragio</code> elegimos <code>Libertad_expresion</code> como predictor en la regresión logística, utilizando la función <code>glm</code>. Esta decisión se basa en la correlación de 0.8 entre ambas variables.</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="imputación-de-datos-faltantes.html#cb5-1" tabindex="-1"></a><span class="co"># Modelo glm</span></span>
 <span id="cb5-2"><a href="imputación-de-datos-faltantes.html#cb5-2" tabindex="-1"></a>datos_IST_imputados_3 <span class="ot">&lt;-</span> datos_IST_imputados_2</span>
 <span id="cb5-3"><a href="imputación-de-datos-faltantes.html#cb5-3" tabindex="-1"></a></span>
-<span id="cb5-4"><a href="imputación-de-datos-faltantes.html#cb5-4" tabindex="-1"></a>modelo_sufragio <span class="ot">&lt;-</span> <span class="fu">glm</span>(Sufragio <span class="sc">~</span> Libertad_expresion, <span class="at">family =</span> binomial, <span class="at">data =</span> datos_IST_imputados_3, <span class="at">na.action =</span> na.exclude)</span></code></pre></div>
-<pre><code>## Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred</code></pre>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="imputación-de-datos-faltantes.html#cb7-1" tabindex="-1"></a><span class="co"># Predecir los valores faltantes de Sufragio</span></span>
-<span id="cb7-2"><a href="imputación-de-datos-faltantes.html#cb7-2" tabindex="-1"></a>predicciones_sufragio <span class="ot">&lt;-</span> <span class="fu">predict</span>(modelo_sufragio, <span class="at">newdata =</span> datos_IST[<span class="fu">is.na</span>(datos_IST_imputados_2<span class="sc">$</span>Sufragio), ], <span class="at">type =</span> <span class="st">&quot;response&quot;</span>)</span>
-<span id="cb7-3"><a href="imputación-de-datos-faltantes.html#cb7-3" tabindex="-1"></a></span>
-<span id="cb7-4"><a href="imputación-de-datos-faltantes.html#cb7-4" tabindex="-1"></a><span class="co"># Imputar los valores predichos</span></span>
-<span id="cb7-5"><a href="imputación-de-datos-faltantes.html#cb7-5" tabindex="-1"></a>datos_IST_imputados_3<span class="sc">$</span>Sufragio[<span class="fu">is.na</span>(datos_IST_imputados_3<span class="sc">$</span>Sufragio)] <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(predicciones_sufragio <span class="sc">&gt;</span> <span class="fl">0.5</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span></code></pre></div>
+<span id="cb5-4"><a href="imputación-de-datos-faltantes.html#cb5-4" tabindex="-1"></a>modelo_sufragio <span class="ot">&lt;-</span> <span class="fu">glm</span>(Sufragio <span class="sc">~</span> Libertad_expresion, <span class="at">family =</span> binomial, <span class="at">data =</span> datos_IST_imputados_3, <span class="at">na.action =</span> na.exclude)</span>
+<span id="cb5-5"><a href="imputación-de-datos-faltantes.html#cb5-5" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="imputación-de-datos-faltantes.html#cb5-6" tabindex="-1"></a><span class="co"># Predecir los valores faltantes de Sufragio</span></span>
+<span id="cb5-7"><a href="imputación-de-datos-faltantes.html#cb5-7" tabindex="-1"></a>predicciones_sufragio <span class="ot">&lt;-</span> <span class="fu">predict</span>(modelo_sufragio, <span class="at">newdata =</span> datos_IST[<span class="fu">is.na</span>(datos_IST_imputados_2<span class="sc">$</span>Sufragio), ], <span class="at">type =</span> <span class="st">&quot;response&quot;</span>)</span>
+<span id="cb5-8"><a href="imputación-de-datos-faltantes.html#cb5-8" tabindex="-1"></a></span>
+<span id="cb5-9"><a href="imputación-de-datos-faltantes.html#cb5-9" tabindex="-1"></a><span class="co"># Imputar los valores predichos</span></span>
+<span id="cb5-10"><a href="imputación-de-datos-faltantes.html#cb5-10" tabindex="-1"></a>datos_IST_imputados_3<span class="sc">$</span>Sufragio[<span class="fu">is.na</span>(datos_IST_imputados_3<span class="sc">$</span>Sufragio)] <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(predicciones_sufragio <span class="sc">&gt;</span> <span class="fl">0.5</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span></code></pre></div>
 <div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:500px; overflow-x: scroll; width:100%; ">
 <table class="table table-striped table-hover table-condensed table-responsive" style="margin-left: auto; margin-right: auto;">
 <caption>

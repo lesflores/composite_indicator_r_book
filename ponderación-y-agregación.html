@@ -212,15 +212,16 @@ div.csl-indent {
 <h1><span class="header-section-number">Capítulo 6</span> Ponderación y Agregación<a href="ponderación-y-agregación.html#ponderación-y-agregación" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>En este manual, presentamos tres enfoques distintos para ponderar y combinar variables en un índice compuesto.</p>
 <p>El primer enfoque se basa en la inclusión de todas las variables y la utilización de puntuaciones z, que estandariza las variables permitiendo que cada una contribuya equitativamente al índice compuesto.</p>
-<p>El segundo método se evalúa la influencia de cada variable en las principales dos dimensiones del famd. Utilizando la función <code>fviz_contrib</code>, destacamos las variables que más contribuyen a cada dimensión, lo que nos permite seleccionar aquellas que son más significativas para nuestro índice compuesto.</p>
+<p>El segundo método se evalúa la influencia de cada variable en las principales dos dimensiones del FAMD. Utilizando la función <code>fviz_contrib</code>, destacamos las variables que más contribuyen a cada dimensión, lo que nos permite seleccionar aquellas que son más significativas para nuestro índice compuesto.</p>
 <p>Finalmente, en el tercer enfoque, no se aplica una ponderación posterior ni una selección de variables. En lugar de ello, utilizamos directamente las dimensiones resultantes del famd como el índice en sí. Las dos primeras dimensiones, Dim1 y Dim2, capturan la mayor parte de la variabilidad y las relaciones intrínsecas en los datos, y se presentan como las coordenadas de nuestras observaciones en este espacio reducido.</p>
 <div id="enfoque-1-inclusión-de-todas-las-variables" class="section level2 hasAnchor" number="6.1">
 <h2><span class="header-section-number">6.1</span> Enfoque 1: Inclusión de todas las Variables<a href="ponderación-y-agregación.html#enfoque-1-inclusión-de-todas-las-variables" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Para elaborar un índice compuesto que integre todas las variables del estudio, se procede con la normalización de los datos mediante la conversión a puntajes z. A continuación, se presenta el proceso de cálculo del índice compuesto basado en estos datos normalizados previamente en el capítulo 4.</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="ponderación-y-agregación.html#cb18-1" tabindex="-1"></a><span class="co"># Data frame con los datos normalizados previamente</span></span>
-<span id="cb18-2"><a href="ponderación-y-agregación.html#cb18-2" tabindex="-1"></a>nombres_planetas <span class="ot">&lt;-</span> datos_IST_imputados_3[, <span class="st">&quot;Planeta&quot;</span>]</span>
-<span id="cb18-3"><a href="ponderación-y-agregación.html#cb18-3" tabindex="-1"></a>puntuaciones_1_df <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(datos_normalizados, nombres_planetas)</span>
-<span id="cb18-4"><a href="ponderación-y-agregación.html#cb18-4" tabindex="-1"></a>puntuaciones_1_df</span></code></pre></div>
+<p>El siguiente código R asume que la normalización de los datos ya ha sido realizada previamente. El código crea un nuevo <code>data.frame</code> llamado <code>puntuaciones_1_df</code> que combina los datos normalizados con los nombres de los planetas.</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="ponderación-y-agregación.html#cb16-1" tabindex="-1"></a><span class="co"># Data frame con los datos normalizados previamente</span></span>
+<span id="cb16-2"><a href="ponderación-y-agregación.html#cb16-2" tabindex="-1"></a>nombres_planetas <span class="ot">&lt;-</span> datos_IST_imputados_3[, <span class="st">&quot;Planeta&quot;</span>]</span>
+<span id="cb16-3"><a href="ponderación-y-agregación.html#cb16-3" tabindex="-1"></a>puntuaciones_1_df <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(datos_normalizados, nombres_planetas)</span>
+<span id="cb16-4"><a href="ponderación-y-agregación.html#cb16-4" tabindex="-1"></a>puntuaciones_1_df</span></code></pre></div>
 <pre><code>##            Libertad_asociacion Elecciones_limpias Libertad_expresion
 ## Vulcano             -0.9983742          1.2570692         1.04480400
 ## Tierra               0.8642586         -0.2031057         0.43948381
@@ -232,33 +233,33 @@ div.csl-indent {
 ## Betazed              0.9890750         -1.3958243         0.07525119
 ## Trill               -0.0168633         -0.5668114        -1.32423046
 ## Qo&#39;noS              -0.3695807          1.2503130        -1.94962975</code></pre>
-<p>En la siguiente etapa, se calcula la media de las puntuaciones z para sintetizar las características distintivas de cada planeta según las variables evaluadas.</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="ponderación-y-agregación.html#cb20-1" tabindex="-1"></a><span class="co"># Media</span></span>
-<span id="cb20-2"><a href="ponderación-y-agregación.html#cb20-2" tabindex="-1"></a>media_1 <span class="ot">&lt;-</span> <span class="fu">rowSums</span>(puntuaciones_1_df)</span>
-<span id="cb20-3"><a href="ponderación-y-agregación.html#cb20-3" tabindex="-1"></a>indice_compuesto_1 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(nombres_planetas, media_1)</span>
-<span id="cb20-4"><a href="ponderación-y-agregación.html#cb20-4" tabindex="-1"></a>indice_compuesto_1 <span class="ot">&lt;-</span> indice_compuesto_1[<span class="fu">order</span>(<span class="sc">-</span>indice_compuesto_1<span class="sc">$</span>media_1), ]</span>
-<span id="cb20-5"><a href="ponderación-y-agregación.html#cb20-5" tabindex="-1"></a></span>
-<span id="cb20-6"><a href="ponderación-y-agregación.html#cb20-6" tabindex="-1"></a></span>
-<span id="cb20-7"><a href="ponderación-y-agregación.html#cb20-7" tabindex="-1"></a><span class="co">#Índice compuesto</span></span>
-<span id="cb20-8"><a href="ponderación-y-agregación.html#cb20-8" tabindex="-1"></a>indice_compuesto_1</span></code></pre></div>
+<p>En la siguiente etapa, se calcula la media de las puntuaciones z para sintetizar las características distintivas de cada planeta según las variables evaluadas, utilizando la función <code>rowMeans</code>.</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="ponderación-y-agregación.html#cb18-1" tabindex="-1"></a><span class="co"># Media</span></span>
+<span id="cb18-2"><a href="ponderación-y-agregación.html#cb18-2" tabindex="-1"></a>media_1 <span class="ot">&lt;-</span> <span class="fu">rowMeans</span>(puntuaciones_1_df)</span>
+<span id="cb18-3"><a href="ponderación-y-agregación.html#cb18-3" tabindex="-1"></a>indice_compuesto_1 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(nombres_planetas, media_1)</span>
+<span id="cb18-4"><a href="ponderación-y-agregación.html#cb18-4" tabindex="-1"></a>indice_compuesto_1 <span class="ot">&lt;-</span> indice_compuesto_1[<span class="fu">order</span>(<span class="sc">-</span>indice_compuesto_1<span class="sc">$</span>media_1), ]</span>
+<span id="cb18-5"><a href="ponderación-y-agregación.html#cb18-5" tabindex="-1"></a></span>
+<span id="cb18-6"><a href="ponderación-y-agregación.html#cb18-6" tabindex="-1"></a></span>
+<span id="cb18-7"><a href="ponderación-y-agregación.html#cb18-7" tabindex="-1"></a><span class="co">#Índice compuesto</span></span>
+<span id="cb18-8"><a href="ponderación-y-agregación.html#cb18-8" tabindex="-1"></a>indice_compuesto_1</span></code></pre></div>
 <pre><code>##            nombres_planetas      media_1
-## Kronos               Kronos  2.741457885
-## Vulcano             Vulcano  1.303498996
-## Tierra               Tierra  1.100636733
-## Cardassia         Cardassia -0.006139732
-## Romulus             Romulus -0.032512544
-## Betazed             Betazed -0.331498112
-## Ferenginar       Ferenginar -0.609074316
-## Qo&#39;noS               Qo&#39;noS -1.068897521
-## Bajor                 Bajor -1.189566228
-## Trill                 Trill -1.907905161</code></pre>
-<p>Este gráfico muestra la media de las puntuaciones z para cada planeta, lo que permite una comparación rápida de sus características basadas en las variables estudiadas.</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="ponderación-y-agregación.html#cb22-1" tabindex="-1"></a><span class="fu">ggplot</span>(indice_compuesto_1, <span class="fu">aes</span>(<span class="at">x =</span> nombres_planetas, <span class="at">y =</span> media_1, <span class="at">fill =</span> nombres_planetas)) <span class="sc">+</span></span>
-<span id="cb22-2"><a href="ponderación-y-agregación.html#cb22-2" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">&quot;identity&quot;</span>) <span class="sc">+</span></span>
-<span id="cb22-3"><a href="ponderación-y-agregación.html#cb22-3" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb22-4"><a href="ponderación-y-agregación.html#cb22-4" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
-<span id="cb22-5"><a href="ponderación-y-agregación.html#cb22-5" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Planetas&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Media de puntuaciones z&quot;</span>, <span class="at">title =</span> <span class="st">&quot;Índice Compuesto por Planeta&quot;</span>) <span class="sc">+</span></span>
-<span id="cb22-6"><a href="ponderación-y-agregación.html#cb22-6" tabindex="-1"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">&quot;Paired&quot;</span>)</span></code></pre></div>
+## Kronos               Kronos  0.913819295
+## Vulcano             Vulcano  0.434499665
+## Tierra               Tierra  0.366878911
+## Cardassia         Cardassia -0.002046577
+## Romulus             Romulus -0.010837515
+## Betazed             Betazed -0.110499371
+## Ferenginar       Ferenginar -0.203024772
+## Qo&#39;noS               Qo&#39;noS -0.356299174
+## Bajor                 Bajor -0.396522076
+## Trill                 Trill -0.635968387</code></pre>
+<p>El gráfico Índice Compuesto por Planeta muestra la media de las puntuaciones z para cada planeta, lo que permite una comparación rápida de sus características basadas en las variables estudiadas.</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="ponderación-y-agregación.html#cb20-1" tabindex="-1"></a><span class="fu">ggplot</span>(indice_compuesto_1, <span class="fu">aes</span>(<span class="at">x =</span> nombres_planetas, <span class="at">y =</span> media_1, <span class="at">fill =</span> nombres_planetas)) <span class="sc">+</span></span>
+<span id="cb20-2"><a href="ponderación-y-agregación.html#cb20-2" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">&quot;identity&quot;</span>) <span class="sc">+</span></span>
+<span id="cb20-3"><a href="ponderación-y-agregación.html#cb20-3" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb20-4"><a href="ponderación-y-agregación.html#cb20-4" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb20-5"><a href="ponderación-y-agregación.html#cb20-5" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Planetas&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Media de puntuaciones z&quot;</span>, <span class="at">title =</span> <span class="st">&quot;Índice Compuesto por Planeta&quot;</span>) <span class="sc">+</span></span>
+<span id="cb20-6"><a href="ponderación-y-agregación.html#cb20-6" tabindex="-1"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">&quot;Paired&quot;</span>)</span></code></pre></div>
 <p><img src="figures/unnamed-chunk-21-1.png" width="672" /></p>
 </div>
 <div id="enfoque-2-selección-de-las-variables-más-significativas-identificadas-en-el-famd" class="section level2 hasAnchor" number="6.2">
